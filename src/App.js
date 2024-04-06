@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Header from './components/Header'
 
-function App() {
+const App = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [count, setCount] = useState({})
+
+  console.log(isLoading)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app">
+      <Header title={isLoading ? 'Loading...' : count.data} />
+      <button onClick={() => {
+        setIsLoading(true)
+
+        setTimeout(() => {
+          setCount({
+            data: 'ini data dari api'
+          })
+          setIsLoading(false)
+        },5000)
+      }}>Count</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

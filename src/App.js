@@ -1,24 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header'
 
 const App = () => {
+  const [count, setCount] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
-  const [count, setCount] = useState({})
+  const [listHeader, setListHeader] = useState([
+    'Title 3',
+    'Title 4',
+    'Title 5',
+  ])
 
-  console.log(isLoading)
+  useEffect(() => {
+    console.log('useEffect')
+  }, [count, isLoading])
+
+  const renderCount = () => {
+    if(count === 0) {
+      return <p>kosong</p>
+    } else {
+      return <p>{count}</p>
+    }
+  }
 
   return (
     <div id="app">
-      <Header title={isLoading ? 'Loading...' : count.data} />
+      {listHeader.map((item, index) => (
+        <Header key={String(index)} title={item} />
+      ))}
+
+      {renderCount()}
+
       <button onClick={() => {
         setIsLoading(true)
-
-        setTimeout(() => {
-          setCount({
-            data: 'ini data dari api'
-          })
-          setIsLoading(false)
-        },5000)
+        setCount(count + 1)
       }}>Count</button>
     </div>
   )

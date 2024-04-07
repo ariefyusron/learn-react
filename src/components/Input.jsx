@@ -1,18 +1,18 @@
-const Input = (props) => {
+const Input = ({ onChange, value, onClick }) => {
 
   return (
     <div>
       <input
         className="border-[6px] border-black"
         onChange={(res) => {
-          props.onChange(res.target.value)
+          onChange(res.target.value)
         }}
-        value={props.value}
+        value={value}
       />
 
       <button
         className='border-[2px] border-black ml-[8px]'
-        onClick={props.onClick}
+        onClick={onClick}
       >
         Tambah
       </button>

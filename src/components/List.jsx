@@ -7,7 +7,7 @@ const List = (props) => {
           <p>Tidak ada data</p>
         ) : props.data.map((item, index) => (
           <div key={String(index)} className='mb-[4px] pb-[2px] border-b border-black'>
-            <p>{item}</p>
+            <p>{`${index + 1}. ${item}`}</p>
           </div>
         ))}
     </div>

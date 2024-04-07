@@ -23,6 +23,15 @@ const App = () => {
 
       {/* ini list data */}
       <List data={list} />
+
+      <button
+        className='border-[2px] border-black mt-[32px]'
+        onClick={() => {
+          setList([])
+        }}
+      >
+        Hapus Data
+      </button>
     </div>
   )
 }

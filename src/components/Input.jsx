@@ -1,5 +1,4 @@
 const Input = ({ onChange, value, onClick }) => {
-
   return (
     <div>
       <input

@@ -1,39 +1,42 @@
-import { useState, useEffect } from 'react';
-import Header from './components/Header'
+import { useState } from 'react';
 
 const App = () => {
-  const [count, setCount] = useState(0)
-  const [isLoading, setIsLoading] = useState(false)
-  const [listHeader, setListHeader] = useState([
-    'Title 3',
-    'Title 4',
-    'Title 5',
-  ])
-
-  useEffect(() => {
-    console.log('useEffect')
-  }, [count, isLoading])
-
-  const renderCount = () => {
-    if(count === 0) {
-      return <p>kosong</p>
-    } else {
-      return <p>{count}</p>
-    }
-  }
+  const [text, setText] = useState("")
+  const [list, setList] = useState([])
 
   return (
-    <div id="app">
-      {listHeader.map((item, index) => (
-        <Header key={String(index)} title={item} />
-      ))}
+    <div className="p-8">
+      {/* ini input */}
+      <div>
+        <input
+          className="border-[6px] border-black"
+          onChange={(res) => {
+            setText(res.target.value)
+          }}
+          value={text}
+        />
 
-      {renderCount()}
+        <button
+          className='border-[2px] border-black ml-[8px]'
+          onClick={() => {
+            setText("")
+            setList([text, ...list])
+          }}
+        >
+          Tambah
+        </button>
+      </div>
 
-      <button onClick={() => {
-        setIsLoading(true)
-        setCount(count + 1)
-      }}>Count</button>
+      {/* ini list data */}
+      <div className='mt-[32px] border border-black p-[8px] rounded-[8px]'>
+          <h2 className='font-bold mb-[8px]'>Todo list:</h2>
+
+          {list.map((item, index) => (
+            <div key={String(index)} className='mb-[4px] pb-[2px] border-b border-black'>
+              <p>{item}</p>
+            </div>
+          ))}
+      </div>
     </div>
   )
 }

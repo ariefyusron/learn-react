@@ -1,28 +1,17 @@
-import { useState } from 'react';
-
 import Input from '../components/Input'
 import List from '../components/List'
+import useTodoListStore from '../store/useTodoListStore'
 
 const App = () => {
-  const [text, setText] = useState("")
-  const [list, setList] = useState([])
+  const setList = useTodoListStore(state => state.setList)
 
   return (
     <div className="p-8">
       {/* ini input */}
-      <Input
-        value={text}
-        onChange={(res) => {
-          setText(res)
-        }}
-        onClick={() => {
-          setText('')
-          setList([text, ...list])
-        }}
-      />
+      <Input />
 
       {/* ini list data */}
-      <List data={list} />
+      <List />
 
       <button
         className='border-[2px] border-black mt-[32px]'

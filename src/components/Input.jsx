@@ -1,17 +1,29 @@
-const Input = ({ onChange, value, onClick }) => {
+import { useState } from 'react'
+
+import useTodoListStore from '../store/useTodoListStore'
+
+const Input = () => {
+  const [text, setText] = useState('')
+
+  const list = useTodoListStore((state) => state)
+  const setList = useTodoListStore(state => state.setList)
+
   return (
     <div>
       <input
         className="border-[6px] border-black"
         onChange={(res) => {
-          onChange(res.target.value)
+          setText(res.target.value)
         }}
-        value={value}
+        value={text}
       />
 
       <button
         className='border-[2px] border-black ml-[8px]'
-        onClick={onClick}
+        onClick={() => {
+          setList([text, ...list])
+          setText('')
+        }}
       >
         Tambah
       </button>

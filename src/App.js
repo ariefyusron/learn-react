@@ -1,39 +1,32 @@
-import { useState } from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
-import Input from './components/Input'
-import List from './components/List'
+import TopNavigation from "./components/TopNavigation";
+
+import HomePage from './pages/Home'
+import DetailPage from './pages/Detail'
 
 const App = () => {
-  const [text, setText] = useState("")
-  const [list, setList] = useState([])
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <TopNavigation />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: "detail",
+          element: <DetailPage />,
+        },
+      ]
+    },
+  ]);
 
-  return (
-    <div className="p-8">
-      {/* ini input */}
-      <Input
-        value={text}
-        onChange={(res) => {
-          setText(res)
-        }}
-        onClick={() => {
-          setText('')
-          setList([text, ...list])
-        }}
-      />
-
-      {/* ini list data */}
-      <List data={list} />
-
-      <button
-        className='border-[2px] border-black mt-[32px]'
-        onClick={() => {
-          setList([])
-        }}
-      >
-        Hapus Data
-      </button>
-    </div>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
